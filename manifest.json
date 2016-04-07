@@ -3,7 +3,7 @@
 
   "name": "_blank",
   "description": "Put a double purple border around links that will open in a new tab (i.e. have target=\"_blank\")",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "icons": {
       "128": "icon128.png"
   },
