@@ -1,12 +1,12 @@
 (function() {
 
-    if (!document.getElementById("blocking_css")) {
-        var blocking_css = document.createElement("div");
-        blocking_css.id = "blocking_css";
-        document.body.appendChild(blocking_css);
-        document.getElementById("blocking_css").innerHTML = "<style>body a[target=\"_blank\"]{border: 0px solid transparent !important;}</style>";
+    if (!document.getElementById("blank_css")) {
+        var blank_css = document.createElement("div");
+        blank_css.id = "blank_css";
+        document.body.appendChild(blank_css);
+        document.getElementById("blank_css").innerHTML = "<style>body a[target=\"_blank\"]{border: 3px double darkviolet !important;}</style>";
     } else {
-        var elem = document.getElementById("blocking_css");
+        var elem = document.getElementById("blank_css");
         elem.remove();
     }
     
