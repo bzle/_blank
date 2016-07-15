@@ -1,26 +1,33 @@
-var enable=true;
 
+
+// var bkg = chrome.extension.getBackgroundPage();
+// bkg.console.log(":: After initialize");
+// bkg.console.log("enabled is "+enabled+".");
+
+var enabled = true;
+chrome.browserAction.setIcon({ path: 'icon.png' });
+
+// ICON CLICK
 chrome.browserAction.onClicked.addListener(function (tab) {
- enable = enable ? false : true;
- if(enable){
-  //turn on...
-  chrome.browserAction.setIcon({ path: 'icon.png' });
-  //chrome.browserAction.setBadgeText({ text: 'ON' });
-  chrome.tabs.executeScript(null, { file: 'enable.js' });
- }else{
-  //turn off...
-  chrome.browserAction.setIcon({ path: 'disabled.png'});
-  //chrome.browserAction.setBadgeText({ text: 'OFF' });
-  chrome.tabs.executeScript(null, { file: 'disable.js' });
- }
+  // enabled = enabled ? false : true;
+  enabled = !enabled
+  updateExtension()
 });
 
+// PAGE LOAD/RELOAD
 chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
   if (changeInfo.status == 'complete') {
-      if (enable) {
-          chrome.tabs.executeScript(null, { file: 'enable.js' });
-      } else {
-          chrome.tabs.executeScript(null, { file: 'disable.js' });
-      }
+    updateExtension()
   }
 })
+
+// UPDATE JAVASCRIPT AND ICON
+function updateExtension() {
+  if (enabled) {
+    chrome.browserAction.setIcon({ path: 'icon.png' });
+    chrome.tabs.executeScript(null, { file: 'enable.js' });
+  } else {
+    chrome.browserAction.setIcon({ path: 'disabled.png'});
+    chrome.tabs.executeScript(null, { file: 'disable.js' });
+  }
+}
